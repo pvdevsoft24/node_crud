@@ -10,10 +10,11 @@ const router = express.Router();
 // Read Address Data
 
 const getAddress = async (req,res) =>{
+    // res.send("sucess");
 
     try{
         const address = await Address.find();
-        res.send(200).json(address);
+        res.send(address);
     }catch(error){
         res.status(404).json({message:error.message});
     }
@@ -22,18 +23,27 @@ const getAddress = async (req,res) =>{
 // Create Address Data
 
 const createAddress = async (req,res) =>{
-    console.log(req.body);
+
+    console.log("Babaji");
+
+    var mName = req.query.name;
+    var mEmail = req.query.email;
+    var mPhone = req.query.phone;
+    var mPlace = req.query.place;
+
+    console.log(mName);
 
     const newAddressData = new Address({
-        name:req.body.name,
-        email:req.body.email,
-        phone:req.body.phone,
-        place:req.body.place
+        name:mName,
+        email:mEmail,
+        phone:mPhone,
+        place:mPlace
     })
 
     try{
         await newAddressData.save();
-        res.status(201).json(newAddressData);
+        res.send(newAddressData);
+        console.log("Saved ");
     }catch(error){
         console.log("Babaji "+error.message);
         res.status(400).json({message:error.message});
