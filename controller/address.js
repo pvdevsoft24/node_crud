@@ -51,5 +51,39 @@ const createAddress = async (req,res) =>{
 }
 
 
+// Update Address Data
+
+const updateAddress = async (req,res) =>{
+
+    console.log("Babaji Update");
+
+    var mName = req.query.name;
+    var mEmail = req.query.email;
+    var mPhone = req.query.phone;
+    var mPlace = req.query.place;
+
+    console.log(mName);
+
+    // const newAddressData = new Address({
+    //     name:mName,
+    //     email:mEmail,
+    //     phone:mPhone,
+    //     place:mPlace
+    // })
+
+    try{
+
+        await Address.findBy
+        await newAddressData.save();
+        res.send(newAddressData);
+        console.log("Saved ");
+    }catch(error){
+        console.log("Babaji "+error.message);
+        res.status(400).json({message:error.message});
+    }
+}
+
+
 module.exports.getAddress = getAddress;
 module.exports.createAddress = createAddress;
+module.exports.updateAddress = updateAddress;
